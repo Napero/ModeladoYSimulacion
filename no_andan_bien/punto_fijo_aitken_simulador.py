@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Simulador del Método del Punto Fijo con Aceleración de Aitken Δ²
 Autor: ChatGPT
