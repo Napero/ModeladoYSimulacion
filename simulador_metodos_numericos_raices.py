@@ -746,3 +746,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#
+# e**x - 3*x**2
+#
