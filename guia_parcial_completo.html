@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa del Parcial - Modelado y Simulación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .nav h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 15px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .step h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .formula {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .example {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .example h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th {
+            background: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .checklist {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .checklist h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .checklist ul {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #856404;
+            font-size: 1.2em;
+        }
+
+        .tip {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .tip h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .warning h4 {
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+
+        .code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e91e63;
+        }
+
+        .highlight h4 {
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+
+            .section-content {
+                padding: 20px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Guía Completa del Parcial</h1>
+            <p>Modelado y Simulación - Universidad Argentina de la Empresa</p>
+        </div>
+
+        <div class="nav">
+            <h2>📚 Navegación Rápida</h2>
+            <div class="nav-links">
+                <a href="#punto1" class="nav-link">🔍 Punto 1: Búsqueda de Raíces</a>
+                <a href="#punto2" class="nav-link">📈 Punto 2: Polinomio de Lagrange</a>
+                <a href="#punto3" class="nav-link">📊 Punto 3: Integración Numérica</a>
+                <a href="#punto4" class="nav-link">🎲 Punto 4: Monte Carlo</a>
+                <a href="#punto5" class="nav-link">🚀 Punto 5: Runge-Kutta</a>
+            </div>
+        </div>
+
+        <!-- PUNTO 1: BÚSQUEDA DE RAÍCES -->
+        <div class="section" id="punto1">
+            <div class="section-header">
+                <h2>🔍 Punto 1: Búsqueda de Raíces</h2>
+                <p>Métodos numéricos para encontrar raíces de ecuaciones</p>
+            </div>
+            <div class="section-content">
+                <div class="highlight">
+                    <h4>🎯 Objetivo</h4>
+                    <p>Encontrar la raíz de una función f(x) = 0 en un intervalo dado usando diferentes métodos
+                        numéricos.</p>
+                </div>
+
+                <div class="step">
+                    <h3>🔍 PASO 1: Verificación de Existencia (Teorema de Bolzano)</h3>
+                    <p><strong>Datos del problema:</strong></p>
+                    <div class="code">
+                        Datos:
+                        - Función: f(x) = [tu función]
+                        - Intervalo: [a, b]
+                    </div>
+
+                    <p><strong>Evaluación en los extremos:</strong></p>
+                    <div class="code">
+                        f(a) = [sustituir a en la función] = [resultado numérico]
+                        f(b) = [sustituir b en la función] = [resultado numérico]
+                    </div>
+
+                    <p><strong>Aplicar Teorema de Bolzano:</strong></p>
+                    <div class="formula">
+                        Si f(x) es continua en [a,b] y f(a) · f(b) < 0, entonces existe al menos una raíz en (a,b).
+                            </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>🚀 PASO 2: Método de Newton-Raphson</h3>
+                        <div class="formula">
+                            x_{n+1} = x_n - f(x_n)/f'(x_n)
+                        </div>
+
+                        <p><strong>Tabla de iteraciones:</strong></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>n</th>
+                                    <th>x_n</th>
+                                    <th>f(x_n)</th>
+                                    <th>f'(x_n)</th>
+                                    <th>x_{n+1}</th>
+                                    <th>Error</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>x₀</td>
+                                    <td>f(x₀)</td>
+                                    <td>f'(x₀)</td>
+                                    <td>x₁ = x₀ - f(x₀)/f'(x₀)</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>x₁</td>
+                                    <td>f(x₁)</td>
+                                    <td>f'(x₁)</td>
+                                    <td>x₂ = x₁ - f(x₁)/f'(x₁)</td>
+                                    <td>|x₁-x₀|</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <h3>🔧 PASO 3: Método de Punto Fijo</h3>
+                        <p><strong>Transformación a punto fijo:</strong></p>
+                        <div class="code">
+                            Para aplicar el método de punto fijo, despejamos x de la ecuación:
+                            f(x) = [tu función] = 0
+
+                            Despejando x obtenemos:
+                            x = [función g(x)]
+
+                            Definimos: g(x) = [función g(x)]
+                        </div>
+
+                        <div class="formula">
+                            x_{n+1} = g(x_n)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>⚡ PASO 4: Aceleración de Aitken</h3>
+                        <div class="formula">
+                            x̂_n = x_n - (x_{n+1} - x_n)²/(x_{n+2} - 2x_{n+1} + x_n)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📊 PASO 5: Comparación de Métodos</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Método</th>
+                                    <th>Iteraciones</th>
+                                    <th>Raíz Aproximada</th>
+                                    <th>Error Final</th>
+                                    <th>Velocidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Newton-Raphson</td>
+                                    <td>[número]</td>
+                                    <td>x* ≈ [valor]</td>
+                                    <td>[error]</td>
+                                    <td>Muy Rápido</td>
+                                </tr>
+                                <tr>
+                                    <td>Punto Fijo</td>
+                                    <td>[número]</td>
+                                    <td>x* ≈ [valor]</td>
+                                    <td>[error]</td>
+                                    <td>Más Lento</td>
+                                </tr>
+                                <tr>
+                                    <td>Punto Fijo + Aitken</td>
+                                    <td>[número]</td>
+                                    <td>x* ≈ [valor]</td>
+                                    <td>[error]</td>
+                                    <td>Acelerado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>✅ Checklist para el Examen</h4>
+                        <ul>
+                            <li>Paso 1: Verificación de Bolzano con evaluación en extremos</li>
+                            <li>Paso 2: Newton-Raphson con tabla de iteraciones</li>
+                            <li>Paso 3: Punto Fijo con transformación g(x)</li>
+                            <li>Paso 4: Aitken con aceleración</li>
+                            <li>Paso 5: Comparación de métodos</li>
+                            <li>Fórmulas: Todas las fórmulas escritas correctamente</li>
+                            <li>Cálculos: Valores numéricos calculados</li>
+                            <li>Conclusión: Resultado final y análisis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUNTO 2: POLINOMIO DE LAGRANGE -->
+            <div class="section" id="punto2">
+                <div class="section-header">
+                    <h2>📈 Punto 2: Polinomio de Lagrange</h2>
+                    <p>Interpolación polinomial y evaluación</p>
+                </div>
+                <div class="section-content">
+                    <div class="highlight">
+                        <h4>🎯 Objetivo</h4>
+                        <p>Encontrar el polinomio de Lagrange que interpola una función f(x) en puntos dados, evaluarlo
+                            en un punto específico y calcular su derivada.</p>
+                    </div>
+
+                    <div class="step">
+                        <h3>📊 PASO 1: Calcular Polinomio de Lagrange</h3>
+                        <p><strong>Datos del problema:</strong></p>
+                        <div class="code">
+                            Datos:
+                            - Función: f(x) = [tu función]
+                            - Nodos: x₀ = [valor], x₁ = [valor], x₂ = [valor], ...
+                            - Puntos: (x₀, f(x₀)), (x₁, f(x₁)), (x₂, f(x₂)), ...
+                        </div>
+
+                        <div class="formula">
+                            P_n(x) = Σ_{i=0}^n f(x_i) · L_i(x)
+                        </div>
+
+                        <div class="formula">
+                            L_i(x) = Π_{j≠i} (x - x_j)/(x_i - x_j)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>🎯 PASO 2: Evaluar en Punto Específico</h3>
+                        <div class="code">
+                            Evaluar el polinomio P_n(x) en x = [punto]
+
+                            P_n([punto]) = [sustituir en el polinomio]
+                            P_n([punto]) = [desarrollar cálculo]
+                            P_n([punto]) = [resultado final]
+                        </div>
+
+                        <p><strong>Verificación con función original:</strong></p>
+                        <div class="code">
+                            f([punto]) = [sustituir en función original]
+                            Error de interpolación: |P_n([punto]) - f([punto])| = [diferencia]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📐 PASO 3: Calcular Derivada del Polinomio</h3>
+                        <div class="code">
+                            Derivada del polinomio P_n(x):
+                            P'_n(x) = d/dx[P_n(x)]
+                            P'_n(x) = [derivar término por término]
+                        </div>
+
+                        <div class="code">
+                            Evaluar P'_n(x) en x = [punto]:
+                            P'_n([punto]) = [sustituir en derivada]
+                            P'_n([punto]) = [resultado]
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>✅ Checklist para el Examen</h4>
+                        <ul>
+                            <li>Paso 1: Calcular polinomios base L_i(x)</li>
+                            <li>Paso 1: Construir polinomio final P_n(x)</li>
+                            <li>Paso 2: Evaluar P_n(x) en punto específico</li>
+                            <li>Paso 2: Verificar con función original</li>
+                            <li>Paso 3: Calcular derivada P'_n(x)</li>
+                            <li>Paso 3: Evaluar derivada en punto</li>
+                            <li>Fórmulas: Todas las fórmulas de Lagrange escritas</li>
+                            <li>Cálculos: Valores numéricos calculados</li>
+                            <li>Errores: Errores de interpolación y derivada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUNTO 3: INTEGRACIÓN NUMÉRICA -->
+            <div class="section" id="punto3">
+                <div class="section-header">
+                    <h2>📊 Punto 3: Integración Numérica</h2>
+                    <p>Métodos del Trapecio y Simpson</p>
+                </div>
+                <div class="section-content">
+                    <div class="highlight">
+                        <h4>🎯 Objetivo</h4>
+                        <p>Calcular integrales definidas usando métodos numéricos cuando la primitiva no es elemental.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <h3>🔍 PASO 1: Identificación del Problema</h3>
+                        <div class="code">
+                            Datos:
+                            - Función: f(x) = [tu función]
+                            - Intervalo: [a, b]
+                            - Integral: I = ∫[a]^[b] f(x) dx
+
+                            Como la primitiva de f(x) = [tu función] no es elemental,
+                            usamos métodos numéricos para aproximar la integral.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📐 PASO 2: Método del Trapecio Compuesto</h3>
+                        <div class="formula">
+                            T_n = h [f(a)/2 + Σ_{i=1}^{n-1} f(a + ih) + f(b)/2]
+                        </div>
+                        <p>donde: h = (b-a)/n</p>
+
+                        <p><strong>Tabla de valores para n = 4:</strong></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>i</th>
+                                    <th>x_i</th>
+                                    <th>f(x_i)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>a</td>
+                                    <td>f(a)</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>a+h</td>
+                                    <td>f(a+h)</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>a+2h</td>
+                                    <td>f(a+2h)</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>a+3h</td>
+                                    <td>f(a+3h)</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>b</td>
+                                    <td>f(b)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <h3>📊 PASO 3: Método de Simpson 1/3</h3>
+                        <div class="formula">
+                            S_n = h/3 [f(a) + f(b) + 4Σ_{i impar} f(a + ih) + 2Σ_{i par} f(a + ih)]
+                        </div>
+                        <p>donde: h = (b-a)/n y n debe ser <strong>par</strong></p>
+
+                        <div class="code">
+                            Para n = 4 (par):
+                            S_4 = h/3 [f(a) + 4f(x₁) + 2f(x₂) + 4f(x₃) + f(b)]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📈 PASO 4: Comparación y Análisis</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Método</th>
+                                    <th>n</th>
+                                    <th>Resultado</th>
+                                    <th>Error estimado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trapecio</td>
+                                    <td>4</td>
+                                    <td>T_4 = [resultado]</td>
+                                    <td>O(h²)</td>
+                                </tr>
+                                <tr>
+                                    <td>Simpson</td>
+                                    <td>4</td>
+                                    <td>S_4 = [resultado]</td>
+                                    <td>O(h⁴)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="tip">
+                            <h4>💡 Análisis</h4>
+                            <ul>
+                                <li>Simpson es más preciso que Trapecio para el mismo n</li>
+                                <li>El error de Simpson es O(h⁴) vs O(h²) del Trapecio</li>
+                                <li>Al aumentar n, ambos métodos convergen al valor real</li>
+                                <li>Simpson requiere n par, Trapecio funciona con cualquier n</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>✅ Checklist para el Examen</h4>
+                        <ul>
+                            <li>Paso 1: Identificación del problema y justificación</li>
+                            <li>Paso 2: Trapecio compuesto con tabla de valores</li>
+                            <li>Paso 3: Simpson 1/3 con tabla de valores</li>
+                            <li>Paso 4: Comparación y análisis de errores</li>
+                            <li>Fórmulas: Todas las fórmulas escritas correctamente</li>
+                            <li>Cálculos: Valores numéricos calculados</li>
+                            <li>Conclusión: Resultado final y análisis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUNTO 4: MONTE CARLO -->
+            <div class="section" id="punto4">
+                <div class="section-header">
+                    <h2>🎲 Punto 4: Integrales Dobles por Monte Carlo</h2>
+                    <p>Método estadístico para integrales múltiples</p>
+                </div>
+                <div class="section-content">
+                    <div class="highlight">
+                        <h4>🎯 Objetivo</h4>
+                        <p>Calcular integrales dobles usando el método de Monte Carlo y verificar estadísticamente los
+                            resultados.</p>
+                    </div>
+
+                    <div class="step">
+                        <h3>🔍 PASO 1: Identificación del Problema</h3>
+                        <div class="code">
+                            Datos:
+                            - Función: f(x,y) = [tu función]
+                            - Dominio: x ∈ [a, b], y ∈ [c, d]
+                            - Integral: I = ∫[a]^[b] ∫[c]^[d] f(x,y) dy dx
+
+                            Como la integral doble puede ser compleja de resolver analíticamente,
+                            usamos el método de Monte Carlo para aproximar el resultado.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📐 PASO 2: Solución Analítica</h3>
+                        <div class="code">
+                            Integrar respecto a y:
+                            ∫[c]^[d] f(x,y) dy = ∫[c]^[d] [función] dy
+                            = [desarrollar] = [resultado en función de x]
+
+                            Integrar respecto a x:
+                            I = ∫[a]^[b] [resultado anterior] dx
+                            = [desarrollar] = [resultado final]
+
+                            Valor numérico:
+                            I ≈ [resultado con decimales]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>🎲 PASO 3: Método de Monte Carlo</h3>
+                        <div class="formula">
+                            Î_N = (1/N) Σ_{i=1}^N f(x_i, y_i)
+                        </div>
+                        <p>donde (x_i, y_i) son puntos aleatorios uniformemente distribuidos en el dominio.</p>
+
+                        <div class="code">
+                            Parámetros:
+                            - N = [número de puntos]
+                            - Semilla: [valor para reproducibilidad]
+                            - Dominio: x ∈ [a, b], y ∈ [c, d]
+                            - Área del dominio: A = (b-a)(d-c) = [valor]
+
+                            Algoritmo:
+                            1. Generar N puntos (x_i, y_i) uniformemente en [a,b] × [c,d]
+                            2. Evaluar f(x_i, y_i) para cada punto
+                            3. Calcular el promedio: Î_N = (1/N) Σ f(x_i, y_i)
+                            4. El resultado es Î_N × A (donde A es el área del dominio)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📊 PASO 4: Análisis Estadístico</h3>
+                        <div class="code">
+                            Estadísticas de la muestra:
+                            - Media muestral: Î_N = [valor]
+                            - Varianza muestral: s² = [valor]
+                            - Desviación estándar: s = [valor]
+                            - Error estándar: SE = s/√N = [valor]
+
+                            Intervalo de confianza al 95%:
+                            IC_95% = Î_N ± 1.96 × SE
+                            IC_95% = [valor] ± 1.96 × [SE]
+                            IC_95% = ([límite_inferior], [límite_superior])
+
+                            Comparación:
+                            - Valor analítico: I = [valor]
+                            - Valor Monte Carlo: Î_N = [valor]
+                            - Error absoluto: |Î_N - I| = [valor]
+                            - Error relativo: |Î_N - I|/|I| × 100% = [valor]%
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>✅ Checklist para el Examen</h4>
+                        <ul>
+                            <li>Paso 1: Identificación del problema y dominio</li>
+                            <li>Paso 2: Solución analítica (si es posible)</li>
+                            <li>Paso 3: Método de Monte Carlo con parámetros</li>
+                            <li>Paso 4: Análisis estadístico y comparación</li>
+                            <li>Fórmulas: Todas las fórmulas escritas correctamente</li>
+                            <li>Cálculos: Valores numéricos calculados</li>
+                            <li>Conclusión: Resultado final y análisis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUNTO 5: RUNGE-KUTTA -->
+            <div class="section" id="punto5">
+                <div class="section-header">
+                    <h2>🚀 Punto 5: Ecuaciones Diferenciales Ordinarias</h2>
+                    <p>Métodos de Euler y Runge-Kutta 4</p>
+                </div>
+                <div class="section-content">
+                    <div class="highlight">
+                        <h4>🎯 Objetivo</h4>
+                        <p>Resolver ecuaciones diferenciales ordinarias usando métodos numéricos (Euler y Runge-Kutta
+                            4).</p>
+                    </div>
+
+                    <div class="step">
+                        <h3>🔍 PASO 1: Identificación del Problema</h3>
+                        <div class="code">
+                            Datos:
+                            - EDO: dy/dt = f(t,y)
+                            - Función: f(t,y) = [tu función]
+                            - Condición inicial: y(t₀) = y₀
+                            - Intervalo: [t₀, t_end]
+                            - Paso: h = [valor]
+
+                            Solución analítica:
+                            Resolver la EDO dy/dt = f(t,y) con y(t₀) = y₀
+                            Resultado: y(t) = [solución analítica]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📐 PASO 2: Método de Euler</h3>
+                        <div class="formula">
+                            y_{n+1} = y_n + h · f(t_n, y_n)
+                        </div>
+
+                        <p><strong>Tabla de iteraciones:</strong></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>n</th>
+                                    <th>t_n</th>
+                                    <th>y_n</th>
+                                    <th>f(t_n, y_n)</th>
+                                    <th>y_{n+1}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>t₀</td>
+                                    <td>y₀</td>
+                                    <td>f(t₀, y₀)</td>
+                                    <td>y₁ = y₀ + h·f(t₀, y₀)</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>t₁</td>
+                                    <td>y₁</td>
+                                    <td>f(t₁, y₁)</td>
+                                    <td>y₂ = y₁ + h·f(t₁, y₁)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <h3>🚀 PASO 3: Método de Runge-Kutta 4</h3>
+                        <div class="formula">
+                            k₁ = f(t_n, y_n)
+                            k₂ = f(t_n + h/2, y_n + h/2·k₁)
+                            k₃ = f(t_n + h/2, y_n + h/2·k₂)
+                            k₄ = f(t_n + h, y_n + h·k₃)
+                            y_{n+1} = y_n + h/6·(k₁ + 2k₂ + 2k₃ + k₄)
+                        </div>
+
+                        <p><strong>Tabla de pendientes:</strong></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>n</th>
+                                    <th>t_n</th>
+                                    <th>y_n</th>
+                                    <th>k1</th>
+                                    <th>k2</th>
+                                    <th>k3</th>
+                                    <th>k4</th>
+                                    <th>y_{n+1}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>t₀</td>
+                                    <td>y₀</td>
+                                    <td>f(t₀, y₀)</td>
+                                    <td>f(t₀+h/2, y₀+h/2·k1)</td>
+                                    <td>f(t₀+h/2, y₀+h/2·k2)</td>
+                                    <td>f(t₀+h, y₀+h·k3)</td>
+                                    <td>y₀ + h/6·(k1 + 2k2 + 2k3 + k4)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <h3>📊 PASO 4: Comparación y Análisis</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Método</th>
+                                    <th>t</th>
+                                    <th>y_numérico</th>
+                                    <th>y_exacto</th>
+                                    <th>Error absoluto</th>
+                                    <th>Error relativo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Euler</td>
+                                    <td>0</td>
+                                    <td>1.000000</td>
+                                    <td>1.000000</td>
+                                    <td>0.000000</td>
+                                    <td>0.000%</td>
+                                </tr>
+                                <tr>
+                                    <td>Euler</td>
+                                    <td>π/10</td>
+                                    <td>1.000000</td>
+                                    <td>1.050132</td>
+                                    <td>0.050132</td>
+                                    <td>4.774%</td>
+                                </tr>
+                                <tr>
+                                    <td>RK4</td>
+                                    <td>0</td>
+                                    <td>1.000000</td>
+                                    <td>1.000000</td>
+                                    <td>0.000000</td>
+                                    <td>0.000%</td>
+                                </tr>
+                                <tr>
+                                    <td>RK4</td>
+                                    <td>π/10</td>
+                                    <td>1.050132</td>
+                                    <td>1.050132</td>
+                                    <td>0.000000</td>
+                                    <td>0.000%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="tip">
+                            <h4>💡 Análisis</h4>
+                            <ul>
+                                <li>RK4 tiene mayor precisión que Euler</li>
+                                <li>El error de Euler es O(h), el de RK4 es O(h⁴)</li>
+                                <li>Para el mismo paso h, RK4 converge más rápido</li>
+                                <li>Euler es más simple pero menos preciso</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>✅ Checklist para el Examen</h4>
+                        <ul>
+                            <li>Paso 1: Identificación del problema y solución analítica</li>
+                            <li>Paso 2: Método de Euler con tabla de iteraciones</li>
+                            <li>Paso 3: Método de RK4 con tabla de pendientes</li>
+                            <li>Paso 4: Comparación y análisis de errores</li>
+                            <li>Fórmulas: Todas las fórmulas escritas correctamente</li>
+                            <li>Cálculos: Valores numéricos calculados</li>
+                            <li>Conclusión: Resultado final y análisis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>🎓 <strong>¡Con esta guía puedes resolver todos los puntos del parcial con cualquier función que te
+                        den!</strong> ✨</p>
+                <p>Recuerda usar los simuladores para verificar tus cálculos y practicar con diferentes ejemplos.</p>
+            </div>
+        </div>
+</body>
+
+</html>

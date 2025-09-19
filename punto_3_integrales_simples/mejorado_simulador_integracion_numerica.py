@@ -212,7 +212,7 @@ class Simulador:
         panel_left.pack(side="left",fill="y")
 
         ttk.Label(panel_left,text="f(x):").grid(row=0,column=0)
-        self.funcion_entry=ttk.Entry(panel_left,width=25); self.funcion_entry.grid(row=0,column=1); self.funcion_entry.insert(0,"sin(x)")
+        self.funcion_entry=ttk.Entry(panel_left,width=25); self.funcion_entry.grid(row=0,column=1); self.funcion_entry.insert(0,"sqrt(2)*exp(x**2)")
         ttk.Label(panel_left,text="a:").grid(row=1,column=0)
         self.a_entry=ttk.Entry(panel_left,width=10); self.a_entry.grid(row=1,column=1); self.a_entry.insert(0,"0")
         ttk.Label(panel_left,text="b:").grid(row=2,column=0)

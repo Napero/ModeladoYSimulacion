@@ -239,7 +239,7 @@ class SimuladorRaices:
 
         # f(x), f'(x), g(x)
         ttk.Label(grid, text="f(x):").grid(row=0, column=0, sticky='w')
-        self.expr_f = tk.StringVar(value="x**2 - 2")
+        self.expr_f = tk.StringVar(value="e**x - 3*x**2")
         ttk.Entry(grid, textvariable=self.expr_f, width=50).grid(row=0, column=1, columnspan=4, sticky='we')
 
         ttk.Label(grid, text="f'(x) (opcional):").grid(row=1, column=0, sticky='w')
@@ -247,7 +247,7 @@ class SimuladorRaices:
         ttk.Entry(grid, textvariable=self.expr_df, width=50).grid(row=1, column=1, columnspan=4, sticky='we')
 
         ttk.Label(grid, text="g(x) (punto fijo):").grid(row=2, column=0, sticky='w')
-        self.expr_g = tk.StringVar(value="(x + 2/x)/2")
+        self.expr_g = tk.StringVar(value="sqrt((e**x)/3)")
         ttk.Entry(grid, textvariable=self.expr_g, width=50).grid(row=2, column=1, columnspan=4, sticky='we')
 
         # Parámetros numéricos

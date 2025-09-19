@@ -19,7 +19,7 @@ class MonteCarloSimulator:
         # Función y límites
         ttk.Label(frame_inputs, text="f(x) =").grid(row=0, column=0)
         self.entry_func = ttk.Entry(frame_inputs, width=25)
-        self.entry_func.insert(0, "sin(x)+1")
+        self.entry_func.insert(0, "sin(x)+1") # exp(2*x - y)
         self.entry_func.grid(row=0, column=1)
  
         ttk.Label(frame_inputs, text="a =").grid(row=0, column=2)

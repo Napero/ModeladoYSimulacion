@@ -25,6 +25,21 @@ class RungeKuttaPro:
         self.create_widgets()
 
     def create_widgets(self):
+        # --- Panel Solución Analítica (ARRIBA DE TODO) ---
+        self.analytic_frame = tk.LabelFrame(self.root, text="SOLUCION ANALITICA - Hace clic en 'Calcular Solucion Analitica'", 
+                                           padx=10, pady=10, bg='#fff3cd', relief="raised", bd=3)
+        self.analytic_frame.pack(fill="x", padx=10, pady=5)
+        self.fig_analytic, self.ax_analytic = plt.subplots(figsize=(12,1))
+        self.ax_analytic.axis("off")
+        self.canvas_analytic = FigureCanvasTkAgg(self.fig_analytic, master=self.analytic_frame)
+        self.canvas_analytic.get_tk_widget().pack(fill="both", expand=True)
+        
+        # Mensaje inicial
+        self.ax_analytic.text(0.5, 0.5, "Hace clic en 'Calcular Solucion Analitica' para ver la formula", 
+                             fontsize=14, ha="center", va="center", 
+                             bbox=dict(boxstyle="round,pad=0.3", facecolor="yellow", alpha=0.7))
+        self.canvas_analytic.draw()
+
         # --- Frame Entrada ---
         frame_in = tk.LabelFrame(self.root, text="Parámetros de Entrada", padx=5, pady=5)
         frame_in.pack(fill="x", padx=10, pady=5)
@@ -47,7 +62,7 @@ class RungeKuttaPro:
         tk.Button(frame_in,text="Ayuda",bg="#2196F3",fg="white",command=self.show_help).grid(row=0,column=14,padx=3)
         tk.Button(frame_in,text="Comparar Métodos",bg="#FF9800",fg="white",command=self.compare_methods).grid(row=0,column=15,padx=3)
         tk.Button(frame_in,text="Calcular Solución Analítica",bg="#9C27B0",fg="white",command=self.calc_analytical).grid(row=0,column=16,padx=3)
-        tk.Button(frame_in,text="Graficar Todos los Métodos",bg="#FF5722",fg="white",command=self.compare_methods).grid(row=0,column=17,padx=3)
+        tk.Button(frame_in,text="Graficar Todos los Métodos",bg="#FF5722",fg="wh<wite",command=self.compare_methods).grid(row=0,column=17,padx=3)
         tk.Button(frame_in,text="Tabla Comparativa",bg="#9E9E9E",fg="white",command=self.generate_comparative_table).grid(row=0,column=18,padx=3)
 
         # --- PanedWindow principal ---
